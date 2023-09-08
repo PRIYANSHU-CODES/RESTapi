@@ -1,10 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
 const port = process.env.PORT || 3000;
+const app = express();
+
 
 
 app.use(bodyParser.json());
+
+
+app.get('/bfhl', (req, res) => {
+    res.status(200).json({ operation_code: 1 });
+});
 
 
 app.post('/bfhl', (req, res) => {
@@ -34,15 +40,13 @@ app.post('/bfhl', (req, res) => {
         res.status(200).json(response);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Error : Server Crashed' });
     }
 });
 
 
-app.get('/bfhl', (req, res) => {
-    res.status(200).json({ operation_code: 1 });
-});
+
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Endpoint running on  ${port}`);
 });
